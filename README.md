@@ -2,23 +2,23 @@
 I used terraform to create a VPC in AWS
 
 
-Tools & Technologies
+<h2>Tools & Technologies</h2>
 
-Terraform
+* Terraform
 
-Amazon Web Services
+* Amazon Web Services
 
-Chocolatey
+* Chocolatey
 
-Visual Studio Code
+* Visual Studio Code
 
-Git Bash
+* Git Bash
 
-Windows PowerShell
+* Windows PowerShell
 
-📊 Architecture Diagram
+<h2>📊Architecture Diagram<h2>
 
-Below is a high-level architecture of the deployed infrastructure:
+<p>Below is a high-level architecture of the deployed infrastructure:<</p>
 
                 Internet
                     │
@@ -36,40 +36,43 @@ Below is a high-level architecture of the deployed infrastructure:
             │ │  Private)  │ │
             │ └────────────┘ │
             └────────────────┘
-🔍 Architecture Explanation
+<h2>🔍 Architecture Explanation</h2>
 
-The VPC serves as the isolated network environment
+* The VPC serves as the isolated network environment
 
-The Internet Gateway enables communication between the VPC and the internet
+* The Internet Gateway enables communication between the VPC and the internet
 
-The CIDR block 10.0.0.0/16 provides a scalable IP range
+* The CIDR block 10.0.0.0/16 provides a scalable IP range
 
-The design is intentionally minimal and extensible for future additions:
+<p>The design is intentionally minimal and extensible for future additions:</p>
 
-Subnets
+* Subnets
 
-Route tables
+* Route tables
 
-NAT Gateway
+* NAT Gateway
 
-Compute resources
+* Compute resources
 
-📸 Screenshots
-
-
-⚙️ Setup & Installation
+<h2>📸 Screenshots</h2>
+<img width="1578" height="641" alt="image" src="https://github.com/user-attachments/assets/63dcbcdf-924a-4fe1-9448-6bb0e8392615" />
 
 
-Install Terraform via Chocolatey
 
-choco install terraform -y
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/8a50ecdf-1033-4f05-a451-72eb98a9a17e" />
+
+<h2>⚙️ Setup & Installation</h2>
+
+* Install Terraform via Chocolatey
+
+* choco install terraform -y
 
 
-🔐 AWS Authentication
+<h2>🔐 AWS Authentication</h2>
 
-aws configure
+   aws configure
 
-📁 Project Structure
+<h2>📁 Project Structure</h2>
 
 terraform-vpc-project/
 ├── provider.tf
@@ -80,69 +83,75 @@ terraform-vpc-project/
 ├── .gitignore
 └── README.md
 
-🧾 Terraform Configuration
+<h2>🧾 Terraform Configuration</h2>
 
-Provider
+* Provider
 
-provider "aws" {
-  region = "eu-west-1"
+    provider "aws" {
+  
+      region = "eu-west-1"
+    }
+
+* VPC
+
+      resource "aws_vpc" "main_vpc" {
+  
+        cidr_block = "10.0.0.0/16"
+      
+        tags = {
+          Name = "main-vpc"
+        }
 }
 
-VPC
+* Internet Gateway
 
-resource "aws_vpc" "main_vpc" {
-  cidr_block = "10.0.0.0/16"
+      resource "aws_internet_gateway" "igw" {
+        vpc_id = aws_vpc.main_vpc.id
+      
+        tags = {
+          Name = "main-igw"
+        }
+      }
 
-  tags = {
-    Name = "main-vpc"
-  }
-}
-Internet Gateway
+<h2>▶️ Deployment</h2>
 
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.main_vpc.id
+* terraform init
 
-  tags = {
-    Name = "main-igw"
-  }
-}
+* terraform plan
 
-▶️ Deployment
-
-terraform init
-
-terraform plan
-
-terraform apply
+* terraform apply
 
 
-📚 Key Learnings
+<h2>📚 Key Learnings</h2>
 
-Terraform workflow and lifecycle
+* Terraform workflow and lifecycle
 
-AWS networking fundamentals
+* AWS networking fundamentals
 
-Infrastructure as Code best practices
-
-
-⚠️ Challenges
-
-Resolved installation issue with Chocolatey
-
-Understood environment configuration and PATH issues
+* Infrastructure as Code best practices
 
 
-🔮 Future Improvements
+<h2>⚠️ Challenges</h2>
 
-Subnets (public/private)
+* Resolved installation issue with Chocolatey
 
-Route tables
+* Understood environment configuration and PATH issues
 
-NAT Gateway
 
-Kubernetes (EKS) integration
+<h2>🔮 Future Improvements</h2>
 
-👤 Author
+* Subnets (public/private)
+
+* Route tables
+
+* NAT Gateway
+
+* Kubernetes (EKS) integration
+
+<h2>👤 Author</h2>
 
 Blessing Taiwo
+
 Cloud & DevOps Enthusiast
+
+https://www.linkedin.com/in/blessing-umanu-taiwo-mgeoson-21a23b78/
